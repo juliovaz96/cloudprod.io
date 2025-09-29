@@ -1,0 +1,81 @@
+flowchart LR
+  %% Title
+  title["CloudProd: onboarding → deploy → monitor"]:::titleStyle
+
+  %% Style Definitions (more colorful, accessible accents)
+  classDef titleStyle fill:#3f51b5,stroke:#303f9f,color:#ffffff,stroke-width:0px,font-weight:bold,font-size:18px
+  classDef userAction fill:#e0f7fa,stroke:#006064,stroke-width:2px,color:#004d40
+  classDef systemProcess fill:#e3f2fd,stroke:#1565c0,stroke-width:1.5px,color:#0d47a1
+  classDef decision fill:#fff3e0,stroke:#ef6c00,stroke-width:2.5px,color:#bf360c
+  classDef deploy fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px,color:#1b5e20
+  classDef legend fill:#fafafa,stroke:#cfd8dc,stroke-width:1px,color:#263238,font-size:12px
+
+  %% Legend
+  subgraph Legend [Legend]
+    direction LR
+    L_user(["User action"]):::userAction
+    L_system(["System process"]):::systemProcess
+    L_decision(["Decision"]):::decision
+    L_deploy(["Deploy / Cloud action"]):::deploy
+    L_note(["Line types: solid thick = primary flow<br/>dotted thin = feedback/loops"]):::legend
+  end
+
+  %% Swimlanes (left-to-right)
+  subgraph Users [Users & GitHub]
+    direction TB
+    U1("Step 1 — Sign in & Install App"):::userAction
+    U2("Step 2 — Select Repo"):::userAction
+    UPR("Step 7 — Review & Merge PR"):::userAction
+  end
+
+  subgraph CP [CloudProd Control Plane]
+    direction TB
+    C1["Step 3 — Scan Repo"]:::systemProcess
+    C2["Step 4 — Recommend Blueprint"]:::systemProcess
+    C3["Step 5 — Configure Secrets"]:::systemProcess
+    C4["Step 6 — Generate PR"]:::systemProcess
+    C5["Step 8 — Terraform Plan"]:::systemProcess
+    C6["Step 9 — Policy Eval"]:::systemProcess
+    C7["Step 10 — Show Plan Summary"]:::systemProcess
+    G{"Step 11 — Approve Apply?"}:::decision
+  end
+
+  subgraph Ops [Deployment & Monitoring]
+    direction TB
+    H{"Step 12 — Hosting Mode?"}:::decision
+    C8A(["Step 13 — Apply in Hosted Azure"]):::deploy
+    C8B(["Step 13 — Apply in Customer Azure"]):::deploy
+    C9["Step 14 — Smoke Tests"]:::systemProcess
+    C10["Step 15 — Update Dashboard"]:::systemProcess
+    A1("Step 16 — Agent Console Action"):::userAction
+    D1["Step 17 — Schedule Drift Detection"]:::systemProcess
+    D2["Step 18 — Open Drift Fix PR"]:::systemProcess
+  end
+
+  %% Main flow (clear labels, em-dash prevents markdown-list parsing)
+  U1 --> U2 --> C1 --> C2 --> C3 --> C4 --> UPR --> C5 --> C6 --> C7 --> G
+  G --|Yes|--> H
+  G -.->|No — postpone| C10
+  H --|Hosted|--> C8A
+  H --|BYO OIDC|--> C8B
+  C8A --> C9
+  C8B --> C9
+  C9 --> C10
+  C10 --> D1 & A1
+  D1 --> D2
+  D2 -.->|Drift fix → plan| C5
+
+  %% Link style: single, vivid primary color; dotted feedback respected via -.-> arrows
+  linkStyle default interpolate basis
+  linkStyle default stroke:#3949ab,stroke-width:3px
+
+  %% Emphasize decision / deploy nodes
+  style G stroke:#ef6c00,stroke-width:3px,fill:#fff8e1
+  style H stroke:#ef6c00,stroke-width:3px,fill:#fff8e1
+  style C8A stroke:#2e7d32,stroke-width:3px,fill:#e8f5e9
+  style C8B stroke:#2e7d32,stroke-width:3px,fill:#e8f5e9
+
+  %% Export tips and accessibility notes
+  %% mmdc -i Untitled-1.mmd -o Untitled-1.svg
+  %% Notes: labels use em-dash '—' to avoid Markdown list parsing in some previews.
+

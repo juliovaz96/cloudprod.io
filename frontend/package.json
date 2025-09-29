@@ -1,0 +1,45 @@
+{
+  "name": "c2plabs-ai-platform",
+  "version": "2.1.0",
+  "description": "C2PLabs.AI - Modern SaaS Platform for DevOps Infrastructure Management",
+  "main": "App.tsx",
+  "type": "module",
+  "scripts": {
+    "dev": "figma-make dev",
+    "build": "figma-make build",
+    "preview": "figma-make preview",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "type-check": "tsc --noEmit"
+  },
+  "keywords": [
+    "devops",
+    "infrastructure",
+    "saas",
+    "react",
+    "typescript",
+    "tailwindcss",
+    "platform"
+  ],
+  "author": "C2PLabs.AI Team",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "lucide-react": "latest",
+    "recharts": "latest",
+    "motion": "latest",
+    "sonner": "latest"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "typescript": "^5.0.0",
+    "tailwindcss": "^4.0.0",
+    "eslint": "^8.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

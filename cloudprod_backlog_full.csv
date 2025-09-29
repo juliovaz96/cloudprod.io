@@ -1,0 +1,65 @@
+Epic,Story,,Priority,Estimate,Acceptance Criteria
+Platform Foundations,Design a HLD Diagram for Platform Foundation,,High,5d,
+Platform Foundations,"Initialize mono-repo (backend, frontend, infra)",,High,3d,"Lint/test pipelines, CI working, docs scaffolded"
+Platform Foundations,Multi-tenant data model in Postgres (RLS by workspace),,High,5d,"Workspaces, projects, envs, runs tables created with RLS"
+Platform Foundations,API Gateway (FastAPI on Functions),,High,5d,"Auth via GitHub OAuth, RBAC roles Owner/Editor/Viewer"
+Platform Foundations,Orchestrator (Durable Functions),,High,8d,"Run state machine plan→policy→gate→apply, resumable"
+Platform Foundations,Blob Storage setup for artifacts,,Medium,3d,"Signed URLs, lifecycle policy set"
+AI Agent Layer,Detector Agent (stack scan),,High,4d,Outputs app_profile.json; schema validated
+AI Agent Layer,Cloud Architect Agent (infra plan),,High,5d,Maps profile → infra_plan.json; blueprint selected; rationale output
+AI Agent Layer,DevOps Agent (pipelines),,High,5d,"Generates GitHub Actions workflows, PR opened"
+AI Agent Layer,IaC Agent (Terraform),,High,6d,"Generates TF modules, runs fmt/validate/plan, outputs plan.json"
+AI Agent Layer,Policy Agent,,High,5d,OPA eval vs plan.json; pass/warn/fail
+AI Agent Layer,RAG Layer (Azure AI Search),,Medium,5d,"Index IaC modules, policies, pipelines, retrieval logged"
+Infrastructure & Execution,Hosted runners (ACA Jobs),,High,6d,"Ephemeral, outbound-only, per-tenant RG isolation"
+Infrastructure & Execution,BYO Azure integration (OIDC),,High,8d,OIDC federation with least-privilege roles
+Infrastructure & Execution,Apply Service (Provisioner),,High,5d,Executes terraform apply gated; signs artifacts
+Infrastructure & Execution,Smoke tests library,,Medium,4d,"Default ping, DB connect, TLS valid, response <500ms"
+Blueprints,Next.js + API + Postgres,,High,5d,"TF modules, pipelines, rationale.md"
+Blueprints,Node API + Postgres,,High,5d,"TF modules, pipelines, rationale.md"
+Blueprints,FastAPI + Postgres,,High,5d,"TF modules, pipelines, rationale.md"
+Blueprints,Nightly E2E tests for all blueprints,,Medium,3d,Plan+Apply+Health pass nightly
+Policy Packs,Network baseline,,High,3d,"OPA policy deny egress, enforce TLS"
+Policy Packs,IAM least privilege,,High,3d,No Owner roles allowed
+Policy Packs,Tagging standard,,Medium,2d,"Tags env, owner, cost enforced"
+Policy Packs,Backup enabled for DB,,Medium,2d,Postgres backups enabled via TF
+Policy Packs,Cost hints,,Medium,2d,SKU mapping to cost tiers
+Drift Detection,Scheduled drift detection,,High,5d,"DriftItem persisted, severity flagged"
+Drift Detection,Drift detail in UI,,Medium,3d,Drift items displayed with evidence
+Drift Detection,Open Fix PR button,,High,4d,Fix PR generated with minimal delta
+Frontend & UI,"Global layout (SidebarNav, TopNav, AppShell)",,High,5d,"Responsive layout, dark/light mode"
+Frontend & UI,Dashboard screen,,High,5d,"KPIs, drift alerts, CTA when empty"
+Frontend & UI,Project list & overview,,High,5d,Project table + env tiles
+Frontend & UI,Run detail screen,,High,6d,"Timeline, logs, policy, risk/cost displayed"
+Frontend & UI,PR Preview screen,,High,6d,"Summary, diff viewer, policy results, rationale"
+Frontend & UI,Drift view,,Medium,5d,"List, detail, Fix PR flow"
+Frontend & UI,Agent Console,,Medium,6d,"Chat input, Proposed Change card, PR CTA"
+Frontend & UI,Migration wizard,,Medium,7d,"Multi-step, resumable, rollback button"
+Frontend & UI,Settings screens,,Medium,5d,"Workspace, integrations, secrets, compliance"
+Integrations,GitHub App,,High,6d,"Install, PRs, checks, comments"
+Integrations,Slack notifications,,Medium,3d,"Run updates, drift alerts"
+Integrations,Teams notifications,,Low,3d,"Run updates, drift alerts"
+Integrations,Webhook handler,,Medium,3d,Events in/out handled
+Billing & Quotas,Meter usage,,High,4d,"Runner minutes, storage, preview envs metered"
+Billing & Quotas,Enforce quotas per plan,,High,3d,Free/Starter/Team/Business enforced
+Billing & Quotas,Usage alerts,,Medium,2d,Alerts at 80/100% usage
+Billing & Quotas,Overages billing integration,,Medium,4d,Stripe integration with overages
+Security & Compliance,OIDC identity everywhere,,High,5d,No static keys; OIDC across services
+Security & Compliance,Per-tenant isolation,,High,4d,RG/Subscription isolation per tenant
+Security & Compliance,Ephemeral runners,,High,4d,"Outbound-only, restricted images"
+Security & Compliance,Secrets broker,,High,4d,No plaintext; KV references only
+Security & Compliance,Cosign-signed artifacts,,Medium,3d,Artifacts signed/verified on read
+Security & Compliance,Append-only audit logs,,Medium,3d,WORM audit log implemented
+Observability,OTel traces,,High,4d,Run_id propagation end-to-end
+Observability,Metrics collection,,High,3d,"Plan/apply latency, drift latency, success rate"
+Observability,Structured logs,,High,3d,JSON logs correlated by run_id
+Observability,SLO dashboards,,Medium,4d,Dashboards in App Insights
+Migration,Export Pack generator,,High,6d,"IaC, pipelines, policies, images, state exported"
+Migration,Shadow stack provision,,High,6d,Provision shadow env in BYO Azure
+Migration,DB copy & validation,,High,5d,DB copied + validated
+Migration,DNS blue-green cutover,,High,5d,"DNS/Front Door migration, rollback possible"
+Migration,Rollback & decommission,,Medium,3d,"Rollback documented, old infra removed"
+Telemetry & Growth,Event tracking,,High,3d,"Activation, TTFP, drift fix events tracked"
+Telemetry & Growth,Funnel dashboards,,Medium,3d,Dashboards for funnels
+Telemetry & Growth,Feature flags,,Medium,2d,"Flags for preview envs, migration wizard"
+Telemetry & Growth,Outcome loop badges,,Low,2d,Deploy badges generated

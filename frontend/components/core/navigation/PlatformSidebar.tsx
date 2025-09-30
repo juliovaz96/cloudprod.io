@@ -1,69 +1,13 @@
 import { 
-  LayoutDashboard,
-  FolderOpen, 
-  Settings,
-  Bot,
-  BarChart3,
-  Layers,
-  GitBranch,
-  Cloud,
-  Monitor,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  Home
 } from 'lucide-react';
 import { Button } from '../../ui/button';
 import { ThemeToggle } from '../forms/ThemeToggle';
 import { useState } from 'react';
 import { useNavigation } from '../../../contexts/NavigationContext';
-
-const navigationItems = [
-  {
-    id: 'dashboard' as const,
-    label: 'Dashboard',
-    icon: LayoutDashboard
-  },
-  {
-    id: 'project-detail' as const,
-    label: 'Projects',
-    icon: FolderOpen
-  },
-  {
-    id: 'environment-detail' as const,
-    label: 'Environments',
-    icon: Cloud
-  },
-  {
-    id: 'ai-copilot' as const,
-    label: 'AI Copilot',
-    icon: Bot
-  },
-  {
-    id: 'observability' as const,
-    label: 'Observability',
-    icon: BarChart3
-  },
-  {
-    id: 'canvas' as const,
-    label: 'Canvas',
-    icon: Layers,
-    description: 'Visual architecture configurator'
-  },
-  {
-    id: 'pipeline-builder' as const,
-    label: 'Pipelines',
-    icon: GitBranch
-  },
-  {
-    id: 'deployment-orchestration' as const,
-    label: 'Deployments',
-    icon: Monitor
-  },
-  {
-    id: 'settings' as const,
-    label: 'Settings',
-    icon: Settings
-  }
-];
+import { PLATFORM_SCREEN_CONFIGS } from './screen-config';
 
 export function PlatformSidebar() {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -77,11 +21,24 @@ export function PlatformSidebar() {
       <div className="p-4 border-b border-sidebar-border">
         <div className="flex items-center justify-between">
           {!isCollapsed && (
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-sidebar-primary rounded-lg flex items-center justify-center">
-                <span className="text-sidebar-primary-foreground font-semibold text-sm">C2P</span>
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-amber-500 rounded-xl flex items-center justify-center shadow-md">
+                <img 
+                  src="/logo/cloudprodai.png" 
+                  alt="CloudProd.AI Logo" 
+                  className="w-6 h-6 object-contain" 
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none';
+                    const fallback = e.currentTarget.nextElementSibling as HTMLElement;
+                    if (fallback) fallback.style.display = 'block';
+                  }}
+                />
+                <span className="text-white font-bold text-sm font-mono hidden">CP</span>
               </div>
-              <span className="font-semibold text-sidebar-foreground">C2PLabs.AI</span>
+              <div className="flex flex-col">
+                <span className="font-bold text-sidebar-foreground text-sm">CloudProd.AI</span>
+                <span className="text-sidebar-foreground/70 text-xs">Platform</span>
+              </div>
             </div>
           )}
           <Button
@@ -99,10 +56,24 @@ export function PlatformSidebar() {
         </div>
       </div>
 
+      {/* Back to Website */}
+      <div className="px-2 pb-2">
+        <Button
+          variant="ghost"
+          onClick={() => navigate('home')}
+          className={`w-full justify-start h-10 px-3 text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground ${
+            isCollapsed ? 'px-2' : ''
+          }`}
+        >
+          <Home className={`h-4 w-4 ${isCollapsed ? '' : 'mr-2'}`} />
+          {!isCollapsed && <span>Back to Website</span>}
+        </Button>
+      </div>
+
       {/* Navigation */}
       <nav className="flex-1 p-2">
         <div className="space-y-1">
-          {navigationItems.map((item) => {
+          {PLATFORM_SCREEN_CONFIGS.map((item) => {
             const isActive = currentScreen === item.id;
             const Icon = item.icon;
             
@@ -110,9 +81,9 @@ export function PlatformSidebar() {
               <Button
                 key={item.id}
                 variant={isActive ? "default" : "ghost"}
-                className={`w-full justify-start h-10 px-3 ${
+                className={`w-full justify-start h-10 px-3 transition-all duration-200 ${
                   isActive 
-                    ? 'bg-sidebar-primary text-sidebar-primary-foreground hover:bg-sidebar-primary/90' 
+                    ? `bg-gradient-to-r ${item.gradient} text-white hover:opacity-90 shadow-lg` 
                     : 'text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground'
                 } ${isCollapsed ? 'px-2' : ''}`}
                 onClick={() => navigate(item.id)}

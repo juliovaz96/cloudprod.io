@@ -21,7 +21,7 @@ export function useDebouncedCallback<T extends (...args: any[]) => void>(
   callback: T,
   delay: number
 ): T {
-  const [debounceTimer, setDebounceTimer] = useState<NodeJS.Timeout>();
+  const [debounceTimer, setDebounceTimer] = useState<ReturnType<typeof setTimeout>>();
 
   const debouncedCallback = ((...args: any[]) => {
     if (debounceTimer) {

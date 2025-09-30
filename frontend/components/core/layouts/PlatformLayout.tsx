@@ -3,6 +3,8 @@ import { PlatformSidebar } from '../navigation/PlatformSidebar';
 import { BreadcrumbNav } from '../navigation/BreadcrumbNav';
 import { LoadingScreen } from '../feedback/LoadingScreen';
 import { useNavigation } from '../../../contexts/NavigationContext';
+import { useGuidelines } from '../../../contexts/GuidelineContext';
+import { cn } from '../../ui/utils';
 
 interface PlatformLayoutProps {
   children: ReactNode;
@@ -20,19 +22,20 @@ export function PlatformLayout({
   showBreadcrumbs = true
 }: PlatformLayoutProps) {
   const { isLoading, loadingMessage } = useNavigation();
+  const { layout } = useGuidelines();
 
   if (isLoading) {
     return <LoadingScreen message={loadingMessage} />;
   }
 
   return (
-    <div className="min-h-screen bg-background font-['Inter',sans-serif]">
-      <div className="flex h-screen">
+    <div className={layout.platform.shell}>
+      <div className={layout.platform.body}>
         {showSidebar && <PlatformSidebar />}
         
-        <div className={`flex-1 flex flex-col overflow-hidden ${className}`}>
+        <div className={cn(layout.platform.content, className)}>
           {showBreadcrumbs && (
-            <div className="border-b border-border bg-card">
+            <div className={layout.platform.header}>
               <div className="px-6 py-4">
                 <BreadcrumbNav />
                 {title && (

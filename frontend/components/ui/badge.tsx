@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Slot } from "@radix-ui/react-slot@1.1.2";
-import { cva, type VariantProps } from "class-variance-authority@0.7.1";
+import { Slot } from "@radix-ui/react-slot";
+import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "./utils";
 
@@ -17,6 +17,17 @@ const badgeVariants = cva(
           "border-transparent bg-destructive text-white [a&]:hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
         outline:
           "text-foreground [a&]:hover:bg-accent [a&]:hover:text-accent-foreground",
+        // Logo-aligned brand variants (Phase 3)
+        brand:
+          "border-orange-500/20 bg-orange-500/10 text-orange-500 [a&]:hover:bg-orange-500/20 focus-visible:ring-orange-500/30",
+        "brand-amber":
+          "border-amber-500/20 bg-amber-500/10 text-amber-500 [a&]:hover:bg-amber-500/20 focus-visible:ring-amber-500/30",
+        feature:
+          "border-blue-500/20 bg-blue-500/10 text-blue-500 [a&]:hover:bg-blue-500/20 focus-visible:ring-blue-500/30",
+        success:
+          "border-green-500/20 bg-green-500/10 text-green-500 [a&]:hover:bg-green-500/20 focus-visible:ring-green-500/30",
+        warning:
+          "border-amber-500/20 bg-amber-500/10 text-amber-500 [a&]:hover:bg-amber-500/20 focus-visible:ring-amber-500/30",
       },
     },
     defaultVariants: {

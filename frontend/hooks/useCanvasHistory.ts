@@ -177,7 +177,7 @@ export function useCanvasHistory(
 
   // Debug logging in development
   useEffect(() => {
-    if (process.env.NODE_ENV === 'development') {
+    if (import.meta.env.MODE === 'development') {
       console.log('Canvas History State:', {
         historySize: history.length,
         currentIndex: historyIndex,

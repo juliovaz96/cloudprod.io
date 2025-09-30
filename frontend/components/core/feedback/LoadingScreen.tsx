@@ -103,7 +103,7 @@ export function LoadingScreen({
             <div className="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-xl flex items-center justify-center">
               <Layers className="w-6 h-6 text-primary-foreground" />
             </div>
-            <span className="text-2xl font-semibold text-foreground">C2PLabs.AI</span>
+            <span className="text-2xl font-semibold text-foreground">CloudProd.AI</span>
           </div>
         )}
 

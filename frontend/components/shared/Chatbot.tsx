@@ -20,14 +20,14 @@ interface ChatbotProps {
 const initialMessages: Message[] = [
   {
     id: '1',
-    content: "Hi! I'm the C2PLabs AI assistant. I can help you with questions about our platform, deployment strategies, or getting started with cloud infrastructure. What would you like to know?",
+    content: "Hi! I'm the CloudProd.AI assistant. I can help you with questions about our platform, deployment strategies, or getting started with cloud infrastructure. What would you like to know?",
     sender: 'bot',
     timestamp: new Date()
   }
 ];
 
 const suggestedQuestions = [
-  "How do I get started with C2PLabs?",
+  "How do I get started with CloudProd.AI?",
   "What cloud providers do you support?",
   "Can I deploy to multiple clouds?",
   "How does the prompt-to-prototype feature work?",
@@ -35,9 +35,9 @@ const suggestedQuestions = [
 ];
 
 const botResponses: Record<string, string> = {
-  "how do i get started": "Getting started with C2PLabs is easy! Simply sign up for a free account, and you can immediately start using our prompt-to-prototype feature. Just describe your infrastructure needs in natural language, and our AI will generate a production-ready architecture.",
-  "cloud providers": "C2PLabs supports all major cloud providers including AWS, Azure, Google Cloud Platform, and on-premises infrastructure. You can deploy to multiple clouds simultaneously with our unified management interface.",
-  "multiple clouds": "Yes! One of C2PLabs' key features is multi-cloud deployment. You can design your infrastructure once and deploy it across AWS, Azure, GCP, or any combination of clouds. Our platform handles the provider-specific configurations automatically.",
+  "how do i get started": "Getting started with CloudProd.AI is easy! Simply sign up for a free account, and you can immediately start using our prompt-to-prototype feature. Just describe your infrastructure needs in natural language, and our AI will generate a production-ready architecture.",
+  "cloud providers": "CloudProd.AI supports all major cloud providers including AWS, Azure, Google Cloud Platform, and on-premises infrastructure. You can deploy to multiple clouds simultaneously with our unified management interface.",
+  "multiple clouds": "Yes! One of CloudProd.AI's key features is multi-cloud deployment. You can design your infrastructure once and deploy it across AWS, Azure, GCP, or any combination of clouds. Our platform handles the provider-specific configurations automatically.",
   "prompt-to-prototype": "Our prompt-to-prototype feature uses advanced AI to convert your natural language descriptions into complete infrastructure architectures. Simply describe what you need (e.g., 'I need a scalable web app with database and caching'), and we'll generate the full cloud architecture with best practices built-in.",
   "free tier": "Our free tier includes access to the prompt-to-prototype feature, visual canvas designer, basic templates, and deployment to one cloud environment. You can create up to 3 projects and deploy up to 5 resources per month.",
   "pricing": "We offer flexible pricing starting with a free tier. Paid plans include unlimited projects, advanced features, team collaboration, enterprise security, and priority support. Visit our pricing page for detailed information.",
@@ -150,7 +150,7 @@ export function Chatbot({ isOpen, onToggle, className }: ChatbotProps) {
               <Bot className="w-4 h-4 text-white" />
             </div>
             <div>
-              <h3 className="font-semibold">C2PLabs Assistant</h3>
+              <h3 className="font-semibold">CloudProd.AI Assistant</h3>
               <p className="text-xs text-muted-foreground">Usually replies instantly</p>
             </div>
           </div>

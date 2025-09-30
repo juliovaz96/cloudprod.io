@@ -23,7 +23,8 @@
       "@/hooks/*": ["./hooks/*"],
       "@/types/*": ["./types/*"],
       "@/styles/*": ["./styles/*"]
-    }
+    },
+    "types": ["vite/client", "node"]
   },
   "include": [
     "**/*.ts",

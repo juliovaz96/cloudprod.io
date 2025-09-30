@@ -1,71 +1,100 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
-@custom-variant dark (&:is(.dark *));
+@import "tailwindcss";
 
 /* 
- * C2PLabs.AI Design System - Phase 1 Refactored
- * Updated to match official UX/UI Guidelines
- * Background Decision: Keeping #0D1117 (modern, GitHub-inspired) over guideline #1E1E1E
+ * CloudProd.AI Design System - Token-Based Architecture
+ * Centralized design tokens with light/dark theme support
  */
 
 :root {
+  /* Design tokens will be injected here by ThemeProvider */
+  
+  /* Light Mode Colors (Default) */
+  --background: #ffffff;
+  --foreground: #171717;
+  --card: #ffffff;
+  --card-foreground: #171717;
+  --popover: #ffffff;
+  --popover-foreground: #171717;
+  --primary: #ff6b35;
+  --primary-foreground: #ffffff;
+  --secondary: #f4f4f5;
+  --secondary-foreground: #171717;
+  --muted: #f4f4f5;
+  --muted-foreground: #737373;
+  --accent: #facc15;
+  --accent-foreground: #1f2937;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --success: #22c55e;
+  --success-foreground: #ffffff;
+  --warning: #facc15;
+  --warning-foreground: #1f2937;
+  --border: #e4e4e7;
+  --input: #e4e4e7;
+  --input-background: #f4f4f5;
+  --ring: #ff6b35;
+  --radius: 0.5rem;
   --font-size: 16px;
   
-  /* Light Mode Colors (Default for :root) */
-  --background: #FFFFFF;
-  --foreground: #1F2937;
-  --card: #F9FAFB;
-  --card-foreground: #1F2937;
-  --popover: #FFFFFF;
-  --popover-foreground: #1F2937;
-  --primary: #FF6B35;              /* Updated to guideline */
-  --primary-foreground: #FFFFFF;
-  --secondary: #F3F4F6;
-  --secondary-foreground: #1F2937;
-  --muted: #F3F4F6;
-  --muted-foreground: #6B7280;
-  --accent: #FACC15;               /* Updated to guideline */
-  --accent-foreground: #1F2937;
-  --destructive: #EF4444;
-  --destructive-foreground: #FFFFFF;
-  --success: #22C55E;              /* Updated to guideline */
-  --success-foreground: #FFFFFF;
-  --warning: #FACC15;              /* Added warning token */
-  --warning-foreground: #1F2937;
-  --border: #E5E7EB;
-  --input: #F9FAFB;
-  --input-background: #F9FAFB;
-  --switch-background: #E5E7EB;
-  --font-weight-medium: 500;
-  --font-weight-normal: 400;
-  --font-weight-semibold: 600;
-  --ring: #FF6B35;                 /* Updated to match primary */
-  --chart-1: #FF6B35;              /* Updated to match primary */
-  --chart-2: #FACC15;              /* Updated to match accent */
-  --chart-3: #22C55E;              /* Updated to match success */
-  --chart-4: #EF4444;
-  --chart-5: #6366F1;
-  --radius: 1rem;
-  --sidebar: #F9FAFB;
-  --sidebar-foreground: #1F2937;
-  --sidebar-primary: #FF6B35;
-  --sidebar-primary-foreground: #FFFFFF;
-  --sidebar-accent: #F3F4F6;
-  --sidebar-accent-foreground: #1F2937;
-  --sidebar-border: #E5E7EB;
-  --sidebar-ring: #FF6B35;
+  /* Spacing utilities */
+  --space-section: 4rem;    /* 64px - between major sections */
+  --space-content: 1.5rem;  /* 24px - between content blocks */
+  --space-tight: 0.5rem;    /* 8px - tight spacing */
   
-  /* Custom C2PLabs colors - Light Mode */
-  --c2p-bg-primary: #FFFFFF;
-  --c2p-bg-secondary: #F9FAFB;
-  --c2p-bg-tertiary: #F3F4F6;
-  --c2p-border: #E5E7EB;
-  --c2p-text-primary: #1F2937;
-  --c2p-text-secondary: #6B7280;
-  --c2p-orange: #FF6B35;           /* Updated to guideline */
-  --c2p-amber: #FACC15;            /* Updated to guideline */
-  --c2p-green: #22C55E;            /* Updated to guideline */
-  --c2p-red: #EF4444;
+  /* Typography scale */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+  
+  /* Font weights */
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  
+  /* Chart colors */
+  --chart-1: #ff6b35;
+  --chart-2: #facc15;
+  --chart-3: #22c55e;
+  --chart-4: #ef4444;
+  --chart-5: #6366f1;
+  
+  /* Sidebar */
+  --sidebar: #f9fafb;
+  --sidebar-foreground: #1f2937;
+  --sidebar-primary: #ff6b35;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f4f4f5;
+  --sidebar-accent-foreground: #171717;
+  --sidebar-border: #e4e4e7;
+  --sidebar-ring: #ff6b35;
+  
+  /* CloudProd.AI Brand Colors - Light Mode (Logo-derived) */
+  --cloudprod-orange: #ff6b35;     /* Primary brand color from logo */
+  --cloudprod-amber: #facc15;      /* Secondary brand color from logo */
+  --cloudprod-blue: #0ea5e9;       /* Tertiary brand color (complementary) */
+  
+  /* Feature Colors (Logo-aligned) */
+  --feature-analytics: #ff6b35;    /* Analytics: Brand orange */
+  --feature-automation: #3b82f6;   /* Automation: Blue */
+  --feature-integration: #22c55e;  /* Integration: Green */
+  --feature-security: #ef4444;     /* Security: Red */
+  --feature-performance: #8b5cf6;  /* Performance: Purple */
+  --feature-monitoring: #6366f1;   /* Monitoring: Indigo */
+  
+  /* Legacy CloudProd.AI colors (compatibility) */
+  --c2p-orange: #ff6b35;
+  --c2p-amber: #facc15;
+  --c2p-green: #22c55e;
+  --c2p-red: #ef4444;
 }
 
 /* Dark Mode - Platform Default (keeping modern #0D1117 background) */
@@ -112,89 +141,56 @@
   --sidebar-border: #374151;
   --sidebar-ring: #FF6B35;         /* Updated to match primary */
   
-  /* Custom C2PLabs colors - Dark Mode */
+  /* CloudProd.AI Brand Colors - Dark Mode (Logo-derived) */
+  --cloudprod-orange: #FF6B35;     /* Primary brand color from logo */
+  --cloudprod-amber: #FACC15;      /* Secondary brand color from logo */
+  --cloudprod-blue: #0EA5E9;       /* Tertiary brand color (complementary) */
+  
+  /* Feature Colors - Dark Mode (Logo-aligned) */
+  --feature-analytics: #FF6B35;    /* Analytics: Brand orange */
+  --feature-automation: #3B82F6;   /* Automation: Blue */
+  --feature-integration: #22C55E;  /* Integration: Green */
+  --feature-security: #EF4444;     /* Security: Red */
+  --feature-performance: #8B5CF6;  /* Performance: Purple */
+  --feature-monitoring: #6366F1;   /* Monitoring: Indigo */
+  
+  /* Platform Layout Colors - Dark Mode */
   --c2p-bg-primary: #0D1117;
   --c2p-bg-secondary: #111827;
   --c2p-bg-tertiary: #1F2937;
   --c2p-border: #374151;
   --c2p-text-primary: #F9FAFB;
   --c2p-text-secondary: #D1D5DB;
+  
+  /* Legacy CloudProd.AI colors - Dark Mode (compatibility) */
   --c2p-orange: #FF6B35;           /* Updated to guideline */
   --c2p-amber: #FACC15;            /* Updated to guideline */
   --c2p-green: #22C55E;            /* Updated to guideline */
   --c2p-red: #EF4444;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-input-background: var(--input-background);
-  --color-switch-background: var(--switch-background);
-  --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
+/* Radius utilities */
+:root {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
-  
-  /* Custom C2PLabs theme colors */
-  --color-success: var(--success);
-  --color-success-foreground: var(--success-foreground);
-  --color-warning: var(--warning);
-  --color-warning-foreground: var(--warning-foreground);
-  --color-c2p-bg-primary: var(--c2p-bg-primary);
-  --color-c2p-bg-secondary: var(--c2p-bg-secondary);
-  --color-c2p-bg-tertiary: var(--c2p-bg-tertiary);
-  --color-c2p-border: var(--c2p-border);
-  --color-c2p-text-primary: var(--c2p-text-primary);
-  --color-c2p-text-secondary: var(--c2p-text-secondary);
-  --color-c2p-orange: var(--c2p-orange);
-  --color-c2p-amber: var(--c2p-amber);
-  --color-c2p-green: var(--c2p-green);
-  --color-c2p-red: var(--c2p-red);
 }
 
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
+/* Base styles */
+* {
+  border-color: var(--border);
+  outline-color: hsl(var(--ring) / 0.5);
+}
 
-  body {
-    @apply bg-background text-foreground;
-    font-family: 'Inter', sans-serif;
-  }
-  
-  .font-mono {
-    font-family: 'JetBrains Mono', monospace;
-  }
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', 'SF Mono', Monaco, Inconsolata, 'Roboto Mono', monospace;
 }
 
 /**
@@ -266,7 +262,7 @@
   }
 }
 
-/* Minimalist utilities for C2PLabs */
+/* Minimalist utilities for CloudProd.AI */
 @layer utilities {
   .c2p-subtle-border {
     border: 1px solid var(--c2p-border);

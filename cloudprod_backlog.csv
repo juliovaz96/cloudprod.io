@@ -1,8 +1,0 @@
-Epic,Story,Priority,Estimate,Acceptance Criteria
-Platform Foundations,"Initialize mono-repo (backend, frontend, infra)",High,3d,"Lint/test pipelines, CI working, docs scaffolded"
-Platform Foundations,Multi-tenant data model in Postgres (RLS by workspace),High,5d,"Workspaces, projects, envs, runs tables created with RLS"
-Platform Foundations,API Gateway (FastAPI on Functions),High,5d,"Auth via GitHub OAuth, RBAC roles Owner/Editor/Viewer"
-Platform Foundations,Orchestrator (Durable Functions),High,8d,"Run state machine plan→policy→gate→apply, resumable"
-Platform Foundations,Blob Storage setup for artifacts,Medium,3d,"Signed URLs, lifecycle policy set"
-AI Agent Layer,Detector Agent (stack scan),High,4d,Outputs app_profile.json; schema validated
-AI Agent Layer,Cloud Architect Agent (infra plan),High,5d,Maps profile → infra_plan.json; blueprint selected; rationale output

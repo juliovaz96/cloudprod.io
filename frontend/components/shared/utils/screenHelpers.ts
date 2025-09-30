@@ -10,7 +10,8 @@ import {
 
 // Get layout type for a screen
 export function getScreenLayout(screen: Screen): 'website' | 'platform' | 'canvas' | 'auth' {
-  return SCREEN_LAYOUTS[screen] || 'platform';
+  const layout = SCREEN_LAYOUTS[screen as keyof typeof SCREEN_LAYOUTS];
+  return (layout as 'website' | 'platform' | 'canvas' | 'auth' | undefined) || 'platform';
 }
 
 // Check if screen is protected
@@ -41,8 +42,11 @@ export function isCanvasScreen(screen: Screen): boolean {
 
 // Get screen title
 export function getScreenTitle(screen: Screen): string {
-  const titles: Record<Screen, string> = {
-    'homepage': 'Home',
+  const titles: Partial<Record<Screen, string>> = {
+    'home': 'Home',
+    'features': 'Features',
+    'solutions': 'Solutions',
+    'docs': 'Documentation',
     'product-overview': 'Product Overview',
     'use-cases': 'Use Cases',
     'faq': 'FAQ',
@@ -55,24 +59,25 @@ export function getScreenTitle(screen: Screen): string {
     'event-registration': 'Event Registration',
     'submit-event': 'Submit Event',
     'plans': 'Plans',
+    'pricing': 'Pricing',
     'login': 'Login',
+    'auth': 'Sign In',
     'dashboard': 'Dashboard',
     'prompt-to-prototype': 'Prompt to Prototype',
     'canvas': 'Architecture Canvas',
     'preview': 'Preview',
     'publish': 'Publish',
     'project-overview': 'Project Overview',
-    'pricing': 'Pricing',
-    'settings': 'Settings',
-    'deployment-orchestration': 'Deployment Orchestration',
-    'pipeline-builder': 'Pipeline Builder',
-    'iac-generator': 'Infrastructure as Code',
-    'mobile-deployment': 'Mobile Deployment Monitor',
     'project-detail': 'Project Details',
     'environment-detail': 'Environment Details',
     'ai-copilot': 'AI Copilot',
     'observability': 'Observability',
-    'theme-demo': 'Theme Demo'
+    'deployment-orchestration': 'Deployment Orchestration',
+    'pipeline-builder': 'Pipeline Builder',
+    'iac-generator': 'Infrastructure as Code',
+    'mobile-deployment': 'Mobile Deployment Monitor',
+    'settings': 'Settings',
+    'theme-demo': 'Design System Showcase'
   };
 
   return titles[screen] || screen;
@@ -80,10 +85,13 @@ export function getScreenTitle(screen: Screen): string {
 
 // Get screen description
 export function getScreenDescription(screen: Screen): string {
-  const descriptions: Record<Screen, string> = {
-    'homepage': 'Welcome to C2PLabs.AI',
+  const descriptions: Partial<Record<Screen, string>> = {
+    'home': 'Welcome to CloudProd.AI',
+    'features': 'Explore our AI capabilities',
+    'solutions': 'Tailored solutions for modern teams',
+    'docs': 'Documentation and integration guides',
     'product-overview': 'Explore our features and capabilities',
-    'use-cases': 'See how C2PLabs.AI can help your team',
+    'use-cases': 'See how CloudProd.AI can help your team',
     'faq': 'Frequently asked questions',
     'community': 'Join our developer community',
     'community-blog': 'Latest insights and tutorials',
@@ -94,23 +102,24 @@ export function getScreenDescription(screen: Screen): string {
     'event-registration': 'Register for an event',
     'submit-event': 'Submit your event to our calendar',
     'plans': 'Choose the right plan for your team',
+    'pricing': 'Flexible pricing for teams of all sizes',
     'login': 'Sign in to your account',
+    'auth': 'Enter your credentials to access the platform',
     'dashboard': 'Overview of your projects and metrics',
     'prompt-to-prototype': 'Generate prototypes from natural language',
     'canvas': 'Visual architecture configurator',
     'preview': 'Preview your infrastructure before deployment',
     'publish': 'Deploy your infrastructure to the cloud',
     'project-overview': 'Manage your projects and teams',
-    'pricing': 'Flexible pricing for teams of all sizes',
-    'settings': 'Account and platform settings',
-    'deployment-orchestration': 'Orchestrate and monitor deployments',
-    'pipeline-builder': 'Build and manage CI/CD pipelines',
-    'iac-generator': 'Generate infrastructure as code',
-    'mobile-deployment': 'Monitor mobile deployments',
     'project-detail': 'Project details and configuration',
     'environment-detail': 'Environment details and status',
     'ai-copilot': 'AI-powered infrastructure assistance',
     'observability': 'Logs, metrics, and distributed tracing',
+    'deployment-orchestration': 'Orchestrate and monitor deployments',
+    'pipeline-builder': 'Build and manage CI/CD pipelines',
+    'iac-generator': 'Generate infrastructure as code',
+    'mobile-deployment': 'Monitor mobile deployments',
+    'settings': 'Account and platform settings',
     'theme-demo': 'Design system and component showcase'
   };
 
@@ -125,8 +134,11 @@ export function getScreenPath(screen: Screen): string {
 
 export function getScreenBreadcrumbs(screen: Screen): string[] {
   // Enhanced breadcrumb logic based on screen relationships
-  const breadcrumbMap: Record<Screen, string[]> = {
-    'homepage': ['Home'],
+  const breadcrumbMap: Partial<Record<Screen, string[]>> = {
+    'home': ['Home'],
+    'features': ['Features'],
+    'solutions': ['Solutions'],
+    'docs': ['Documentation'],
     'product-overview': ['Product Overview'],
     'use-cases': ['Use Cases'],
     'faq': ['FAQ'],
@@ -139,7 +151,9 @@ export function getScreenBreadcrumbs(screen: Screen): string[] {
     'event-registration': ['Community', 'Events', 'Register'],
     'submit-event': ['Community', 'Submit Event'],
     'plans': ['Plans'],
+    'pricing': ['Pricing'],
     'login': ['Login'],
+    'auth': ['Sign In'],
     'dashboard': ['Dashboard'],
     'prompt-to-prototype': ['Dashboard', 'Prompt to Prototype'],
     'canvas': ['Dashboard', 'Architecture Canvas'],
@@ -150,12 +164,11 @@ export function getScreenBreadcrumbs(screen: Screen): string[] {
     'environment-detail': ['Dashboard', 'Projects', 'Environment'],
     'ai-copilot': ['Dashboard', 'AI Copilot'],
     'observability': ['Dashboard', 'Observability'],
-    'pricing': ['Pricing'],
-    'settings': ['Dashboard', 'Settings'],
     'deployment-orchestration': ['Dashboard', 'Deployments'],
     'pipeline-builder': ['Dashboard', 'Pipelines'],
     'iac-generator': ['Dashboard', 'Infrastructure'],
     'mobile-deployment': ['Dashboard', 'Mobile Deployment'],
+    'settings': ['Dashboard', 'Settings'],
     'theme-demo': ['Dashboard', 'Theme Demo']
   };
 

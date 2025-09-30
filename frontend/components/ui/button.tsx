@@ -1,15 +1,32 @@
 import * as React from "react";
-import { Slot } from "@radix-ui/react-slot@1.1.2";
-import { cva, type VariantProps } from "class-variance-authority@0.7.1";
+import { Slot } from "@radix-ui/react-slot";
+import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "./utils";
+import {
+  disabledState,
+  focusRing,
+  iconBase,
+  interactiveBase,
+  invalidRing,
+} from "./system/variants";
+
+const buttonBase =
+  `${interactiveBase} ${focusRing} ${invalidRing} ${disabledState} ${iconBase} inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium shrink-0`;
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
+  buttonBase,
   {
     variants: {
       variant: {
         default: "bg-primary text-primary-foreground hover:bg-primary/90",
+        // Logo-aligned brand variants (Phase 3)
+        brand: "bg-gradient-to-r from-orange-500 to-amber-500 text-white hover:from-orange-600 hover:to-amber-600 focus-visible:ring-orange-500/40 shadow-lg hover:shadow-xl",
+        "brand-outline": "border-2 border-orange-500 text-orange-500 bg-transparent hover:bg-orange-500 hover:text-white focus-visible:ring-orange-500/40 transition-all duration-200",
+        feature: "bg-gradient-to-r from-blue-500 to-cyan-500 text-white hover:from-blue-600 hover:to-cyan-600 focus-visible:ring-blue-500/40",
+        success: "bg-gradient-to-r from-green-500 to-emerald-500 text-white hover:from-green-600 hover:to-emerald-600 focus-visible:ring-green-500/40",
+        warning: "bg-gradient-to-r from-amber-500 to-orange-500 text-white hover:from-amber-600 hover:to-orange-600 focus-visible:ring-amber-500/40",
+        // Original variants
         destructive:
           "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
         outline:

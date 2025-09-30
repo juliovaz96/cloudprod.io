@@ -3,6 +3,8 @@ import { WebsiteNavigation } from '../navigation/WebsiteNavigation';
 import { WebsiteFooter } from '../navigation/WebsiteFooter';
 import { LoadingScreen } from '../feedback/LoadingScreen';
 import { useNavigation } from '../../../contexts/NavigationContext';
+import { useGuidelines } from '../../../contexts/GuidelineContext';
+import { cn } from '../../ui/utils';
 
 interface WebsiteLayoutProps {
   children: ReactNode;
@@ -18,16 +20,17 @@ export function WebsiteLayout({
   showFooter = true
 }: WebsiteLayoutProps) {
   const { isLoading, loadingMessage } = useNavigation();
+  const { layout } = useGuidelines();
 
   if (isLoading) {
     return <LoadingScreen message={loadingMessage} />;
   }
 
   return (
-    <div className="min-h-screen bg-background font-['Inter',sans-serif]">
+    <div className={layout.page}>
       {showNavigation && <WebsiteNavigation />}
       
-      <main className={`flex-1 ${className}`}>
+      <main className={cn('flex-1', className)}>
         {children}
       </main>
       

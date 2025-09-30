@@ -6,9 +6,11 @@ import { Chatbot } from '../../shared/Chatbot';
 import { ArrowRight, Cpu, Cloud, Zap, Shield, Code, Layers, MessageSquare, GitBranch, Monitor, Calendar, Coffee, ExternalLink, Book, ArrowUpRight, TrendingUp, Award, Users2 } from 'lucide-react';
 import { motion } from 'motion/react';
 import { WebsiteLayout } from '../../core/layouts';
+import { ThemeToggle } from '../../core/forms/ThemeToggle';
+import { Screen } from '../../../contexts/NavigationContext';
 
 interface HomepageScreenProps {
-  onNavigate: (screen: string) => void;
+  onNavigate: (screen: Screen) => void;
 }
 
 export function HomepageScreen({ onNavigate }: HomepageScreenProps) {
@@ -38,7 +40,7 @@ export function HomepageScreen({ onNavigate }: HomepageScreenProps) {
     {
       icon: MessageSquare,
       title: "Prompt to Prototype",
-      description: "Describe your infrastructure needs in natural language and watch as C2PLabs generates production-ready architectures.",
+      description: "Describe your infrastructure needs in natural language and watch as CloudProd.AI generates production-ready architectures.",
       demo: "Natural language → Cloud architecture"
     },
     {
@@ -68,7 +70,7 @@ export function HomepageScreen({ onNavigate }: HomepageScreenProps) {
     {
       name: "Sarah Chen",
       role: "DevOps Lead at TechCorp",
-      content: "C2PLabs reduced our infrastructure deployment time from weeks to hours. The AI-generated architectures are production-ready.",
+      content: "CloudProd.AI reduced our infrastructure deployment time from weeks to hours. The AI-generated architectures are production-ready.",
       avatar: "👩‍💻"
     },
     {
@@ -80,7 +82,7 @@ export function HomepageScreen({ onNavigate }: HomepageScreenProps) {
     {
       name: "Dr. Emily Watson",
       role: "CTO at InnovateLabs",
-      content: "From prompt to production in minutes. C2PLabs has revolutionized how we approach infrastructure as code.",
+      content: "From prompt to production in minutes. CloudProd.AI has revolutionized how we approach infrastructure as code.",
       avatar: "👩‍🔬"
     }
   ];
@@ -115,6 +117,11 @@ export function HomepageScreen({ onNavigate }: HomepageScreenProps) {
   return (
     <WebsiteLayout>
       <div className="min-h-screen bg-background">
+        {/* Header with Theme Toggle */}
+        <header className="absolute top-0 right-0 z-50 p-6">
+          <ThemeToggle />
+        </header>
+        
         {/* Hero Section */}
         <section className="relative overflow-hidden py-20 lg:py-32">
           <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/5"></div>
@@ -133,7 +140,7 @@ export function HomepageScreen({ onNavigate }: HomepageScreenProps) {
               
               <h1 className="text-5xl lg:text-7xl font-semibold mb-6 bg-gradient-to-r from-foreground via-foreground to-muted-foreground bg-clip-text text-transparent">
                 Infrastructure Made
-                <span className="block bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                <span className="inline-block bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                   Intelligent
                 </span>
               </h1>
@@ -170,7 +177,7 @@ export function HomepageScreen({ onNavigate }: HomepageScreenProps) {
         <section className="py-20 bg-card">
           <div className="container mx-auto px-6">
             <div className="text-center mb-16">
-              <h2 className="text-3xl font-semibold mb-4">See C2PLabs in Action</h2>
+              <h2 className="text-3xl font-semibold mb-4">See CloudProd.AI in Action</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
                 Experience the power of AI-driven infrastructure development
               </p>
@@ -219,7 +226,7 @@ export function HomepageScreen({ onNavigate }: HomepageScreenProps) {
             <div className="text-center mb-16">
               <h2 className="text-3xl font-semibold mb-4">Built for Every Use Case</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                From startups to enterprises, C2PLabs scales with your infrastructure needs
+                From startups to enterprises, CloudProd.AI scales with your infrastructure needs
               </p>
             </div>
             
@@ -264,7 +271,7 @@ export function HomepageScreen({ onNavigate }: HomepageScreenProps) {
             <div className="text-center mb-16">
               <h2 className="text-3xl font-semibold mb-4">Trusted by Engineering Teams</h2>
               <p className="text-muted-foreground">
-                See what developers and DevOps engineers are saying about C2PLabs
+                See what developers and DevOps engineers are saying about CloudProd.AI
               </p>
             </div>
             
@@ -290,7 +297,7 @@ export function HomepageScreen({ onNavigate }: HomepageScreenProps) {
           <div className="container mx-auto px-6 text-center">
             <h2 className="text-3xl font-semibold mb-4">Ready to Transform Your Infrastructure?</h2>
             <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Join thousands of developers who are already building smarter infrastructure with C2PLabs
+              Join thousands of developers who are already building smarter infrastructure with CloudProd.AI
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

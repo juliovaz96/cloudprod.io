@@ -14,7 +14,7 @@ export function WebsiteFooter() {
               <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
                 <span className="text-primary-foreground font-mono text-sm font-semibold">C2</span>
               </div>
-              <span className="text-foreground font-semibold text-lg">C2PLabs.AI</span>
+              <span className="text-foreground font-semibold text-lg">CloudProd.AI</span>
             </div>
             <p className="text-muted-foreground text-sm">
               From Prompt to Production. Multi-Cloud. AI-Native.
@@ -102,7 +102,7 @@ export function WebsiteFooter() {
 
         <div className="border-t border-border mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-muted-foreground text-sm">
-            © 2024 C2PLabs. All rights reserved.
+            © 2024 CloudProd.AI. All rights reserved.
           </p>
           <div className="flex space-x-4 mt-4 md:mt-0">
             <a href="#" className="text-muted-foreground hover:text-primary transition-colors">

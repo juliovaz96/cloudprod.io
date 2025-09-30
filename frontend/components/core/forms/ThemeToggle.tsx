@@ -1,35 +1,14 @@
-import { useState, useEffect } from 'react';
+import React from 'react';
+import { useTheme } from '../../../src/providers/ThemeProvider';
 import { Button } from '../../ui/button';
 import { Moon, Sun, Monitor } from 'lucide-react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '../../ui/dropdown-menu';
 
-type Theme = 'light' | 'dark' | 'system';
-
 export function ThemeToggle() {
-  const [theme, setTheme] = useState<Theme>('dark'); // Platform defaults to dark mode
+  const { theme, setTheme } = useTheme();
 
-  useEffect(() => {
-    // Initialize theme on mount
-    const savedTheme = (localStorage.getItem('c2p-theme') as Theme) || 'dark';
-    applyTheme(savedTheme);
-    setTheme(savedTheme);
-  }, []);
-
-  const applyTheme = (newTheme: Theme) => {
-    const root = document.documentElement;
-    
-    if (newTheme === 'system') {
-      const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      root.classList.toggle('dark', systemPrefersDark);
-    } else {
-      root.classList.toggle('dark', newTheme === 'dark');
-    }
-  };
-
-  const handleThemeChange = (newTheme: Theme) => {
+  const handleThemeChange = (newTheme: 'light' | 'dark' | 'system') => {
     setTheme(newTheme);
-    applyTheme(newTheme);
-    localStorage.setItem('c2p-theme', newTheme);
   };
 
   const getThemeIcon = () => {

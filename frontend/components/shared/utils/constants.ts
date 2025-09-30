@@ -8,7 +8,11 @@ export const SCREEN_CATEGORIES = {
 
 // Website screens
 export const WEBSITE_SCREENS = [
-  'homepage',
+  'home',
+  'features',
+  'solutions',
+  'pricing',
+  'docs',
   'product-overview',
   'use-cases',
   'faq',
@@ -26,6 +30,16 @@ export const WEBSITE_SCREENS = [
 // Platform screens
 export const PLATFORM_SCREENS = [
   'dashboard',
+  'connect-github',
+  'detect-stack',
+  'stack-configurator',
+  'blueprint-select',
+  'secrets-wizard',
+  'pr-preview',
+  'run-detail',
+  'drift-view',
+  'agent-console',
+  'migration-wizard',
   'project-overview',
   'project-detail',
   'environment-detail',
@@ -35,7 +49,10 @@ export const PLATFORM_SCREENS = [
   'pipeline-builder',
   'iac-generator',
   'mobile-deployment',
-  'settings'
+  'ai-agents',
+  'workspaces',
+  'settings',
+  'theme-demo'
 ] as const;
 
 // Development flow screens
@@ -48,8 +65,8 @@ export const DEVELOPMENT_SCREENS = [
 
 // Authentication screens
 export const AUTH_SCREENS = [
-  'login',
-  'pricing'
+  'auth',
+  'login'
 ] as const;
 
 // All protected screens requiring authentication

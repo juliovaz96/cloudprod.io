@@ -1,39 +1,51 @@
 import React, { useState } from 'react';
 import { Button } from '../../ui/button';
-import { ChevronDown, ExternalLink, Calendar, BookOpen, MessageCircle } from 'lucide-react';
+import { 
+  ChevronDown, ExternalLink, Calendar, BookOpen, MessageCircle,
+  Github, Twitter
+} from 'lucide-react';
 import { useNavigation } from '../../../contexts/NavigationContext';
+import { WEBSITE_SCREEN_CONFIGS } from './screen-config';
 
 export function WebsiteNavigation() {
   const [isCommunityOpen, setIsCommunityOpen] = useState(false);
   const { currentScreen, navigate } = useNavigation();
   
-  const navigationItems = [
-    { id: 'product-overview' as const, label: 'Product Overview' },
-    { id: 'use-cases' as const, label: 'Use Cases' },
-    { id: 'faq' as const, label: 'FAQ' },
-    { id: 'plans' as const, label: 'Plans' }
-  ];
+  const navigationItems = WEBSITE_SCREEN_CONFIGS.filter(screen => 
+    ['features', 'solutions', 'pricing', 'docs'].includes(screen.id)
+  );
 
   const communityItems = [
     { 
-      id: 'community-blog' as const, 
-      label: 'Blog', 
+      key: 'docs',
+      screen: 'docs' as const,
+      label: 'Documentation', 
       icon: <BookOpen className="w-4 h-4" />,
-      description: 'Latest insights and tutorials'
+      description: 'Guides, tutorials, and API reference'
     },
     { 
-      id: 'community-events' as const, 
-      label: 'Events', 
-      icon: <Calendar className="w-4 h-4" />,
-      description: 'Webinars, meetups, and workshops'
+      key: 'community-github',
+      label: 'GitHub', 
+      icon: <Github className="w-4 h-4" />,
+      description: 'Open source projects and examples',
+      external: true,
+      href: 'https://github.com/cloudprodai'
     },
     { 
-      id: 'discord' as const, 
+      key: 'community-discord',
       label: 'Discord', 
       icon: <MessageCircle className="w-4 h-4" />,
       description: 'Join our developer community',
       external: true,
-      href: 'https://discord.gg/c2plabs' // Placeholder URL
+      href: 'https://discord.gg/cloudprodai'
+    },
+    { 
+      key: 'community-twitter',
+      label: 'Twitter', 
+      icon: <Twitter className="w-4 h-4" />,
+      description: 'Follow us for updates and news',
+      external: true,
+      href: 'https://twitter.com/cloudprodai'
     }
   ];
 
@@ -42,31 +54,50 @@ export function WebsiteNavigation() {
       {/* Logo */}
       <div className="flex items-center">
         <button 
-          onClick={() => navigate('homepage')}
-          className="flex items-center space-x-2 hover:opacity-80 transition-opacity"
+          onClick={() => navigate('home')}
+          className="flex items-center space-x-3 hover:opacity-80 transition-opacity"
         >
-          <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
-            <span className="text-primary-foreground font-mono text-sm font-semibold">C2</span>
+          <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-amber-500 rounded-xl flex items-center justify-center shadow-lg">
+            <img 
+              src="/logo/cloudprodai.png" 
+              alt="CloudProd.AI Logo" 
+              className="w-6 h-6 object-contain" 
+              onError={(e) => {
+                // Fallback to text logo if image fails to load
+                e.currentTarget.style.display = 'none';
+                const fallback = e.currentTarget.nextElementSibling as HTMLElement;
+                if (fallback) fallback.style.display = 'block';
+              }}
+            />
+            <span className="text-white font-bold text-sm font-mono hidden">CP</span>
           </div>
-          <span className="text-foreground font-semibold text-lg">C2PLabs.AI</span>
+          <div className="flex flex-col">
+            <span className="text-foreground font-bold text-lg tracking-tight">CloudProd.AI</span>
+            <span className="text-muted-foreground text-xs font-medium">Infrastructure Intelligence</span>
+          </div>
         </button>
       </div>
 
       {/* Navigation Items */}
-      <div className="hidden md:flex items-center space-x-8">
-        {navigationItems.map((item) => (
-          <button
-            key={item.id}
-            onClick={() => navigate(item.id)}
-            className={`transition-colors hover:text-primary ${
-              currentScreen === item.id 
-                ? 'text-primary' 
-                : 'text-muted-foreground'
-            }`}
-          >
-            {item.label}
-          </button>
-        ))}
+      <div className="hidden md:flex items-center space-x-6">
+        {navigationItems.map((item) => {
+          const Icon = item.icon;
+          const isActive = currentScreen === item.id;
+          return (
+            <button
+              key={item.id}
+              onClick={() => navigate(item.id)}
+              className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-all duration-200 ${
+                isActive
+                  ? `${item.color} bg-gradient-to-r ${item.gradient} bg-opacity-10 border border-current border-opacity-20` 
+                  : 'text-muted-foreground hover:text-foreground hover:bg-accent/50'
+              }`}
+            >
+              <Icon className="w-4 h-4" />
+              <span className="font-medium">{item.label}</span>
+            </button>
+          );
+        })}
         
         {/* Community Mega Menu */}
         <div 
@@ -76,7 +107,7 @@ export function WebsiteNavigation() {
         >
           <button
             className={`flex items-center space-x-1 transition-colors hover:text-primary ${
-              currentScreen?.startsWith('community') 
+              currentScreen === 'docs' 
                 ? 'text-primary' 
                 : 'text-muted-foreground'
             }`}
@@ -94,7 +125,7 @@ export function WebsiteNavigation() {
             <div className="p-6">
               <div className="space-y-4">
                 {communityItems.map((item) => (
-                  <div key={item.id}>
+                  <div key={item.key}>
                     {item.external ? (
                       <a
                         href={item.href}
@@ -118,7 +149,7 @@ export function WebsiteNavigation() {
                     ) : (
                       <button
                         onClick={() => {
-                          navigate(item.id);
+                          if ('screen' in item && item.screen) navigate(item.screen);
                           setIsCommunityOpen(false);
                         }}
                         className="w-full flex items-start space-x-3 p-3 rounded-lg hover:bg-secondary transition-colors group text-left"
@@ -146,13 +177,13 @@ export function WebsiteNavigation() {
       <div className="flex items-center space-x-4">
         <Button
           variant="outline"
-          onClick={() => navigate('login')}
+          onClick={() => navigate('auth')}
           className="border-border text-muted-foreground hover:border-primary hover:text-primary bg-transparent"
         >
           Login
         </Button>
         <Button
-          onClick={() => navigate('login')}
+          onClick={() => navigate('auth')}
           className="bg-primary hover:bg-primary/90 text-primary-foreground"
         >
           Get Started Free

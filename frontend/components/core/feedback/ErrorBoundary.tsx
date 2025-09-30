@@ -108,7 +108,7 @@ Technical Details:
 ${errorData.stack}
     `);
     
-    window.open(`mailto:support@c2plabs.ai?subject=${subject}&body=${body}`);
+    window.open(`mailto:support@cloudprod.ai?subject=${subject}&body=${body}`);
   };
 
   render() {
@@ -213,7 +213,7 @@ ${errorData.stack}
                 <p>
                   If this problem persists, please{' '}
                   <a 
-                    href="mailto:support@c2plabs.ai" 
+                    href="mailto:support@cloudprod.ai" 
                     className="text-primary hover:underline"
                   >
                     contact our support team
